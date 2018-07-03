@@ -67,14 +67,21 @@ func getMovieDetail(movieURL string) MovieDetail {
 
 	var validRuntime = regexp.MustCompile(`片長：(\d*)分 上映日期：(\d\d\d\d/\d\d/\d\d)`)
 	rtResult := validRuntime.FindStringSubmatch(runtime)
+	mvTime := ""
+	mvDate := ""
+
+	if len(rtResult) > 1 {
+		mvTime = rtResult[1]
+		mvDate = rtResult[2]
+	}
 
 	detail := MovieDetail{
 		URL:     movieURL,
 		Title:   strings.TrimSpace(title),
 		Poster:  poster,
 		Desc:    strings.TrimSpace(desc),
-		Runtime: rtResult[1],
-		OnDate:  rtResult[2],
+		Runtime: mvTime,
+		OnDate:  mvDate,
 	}
 	return detail
 }
