@@ -43,7 +43,7 @@ func getMovieURL(movieName string) (string, bool) {
 		log.Fatal(err)
 	}
 
-	s := doc.Find("blockquote header").First()
+	s := doc.Find("blockquote header").Last()
 	return s.Find("a").Attr("href")
 }
 func getMovieDetail(movieURL string) MovieDetail {
